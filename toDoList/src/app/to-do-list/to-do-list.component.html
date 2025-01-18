@@ -1,0 +1,19 @@
+<div class="container d-flex flex-column align-items-center border border-light-subtle mt-3">
+
+  @for(task of tasksInput;track task.id){
+  <div class="container d-flex  align-items-center">
+    @if(task.isComplete === true){
+    <button (click)="completeTask(task.id)" #completeBtn type="button" class="btn btn-success">Undo</button>
+    <button (click)="taskToWrapper(task.id)" type="button" class="btn btn-danger m-3">Delete</button>
+    <h5 style="text-decoration: line-through;">{{task.title}}</h5>
+    }@else {
+    <button (click)="completeTask(task.id)" #completeBtn type="button" class="btn btn-success">Completed</button>
+    <button (click)="taskToWrapper(task.id)" type="button" class="btn btn-danger m-3">Delete</button>
+    <h5>{{task.title}}</h5>
+    }
+
+  </div>
+
+  }
+
+</div>

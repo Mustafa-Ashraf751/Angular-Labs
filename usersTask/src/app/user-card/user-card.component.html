@@ -1,0 +1,24 @@
+<div class="card increase-border h-100">
+  <div class="d-flex justify-content-center align-items-center pt-3">
+    <img [src]="userCard.image" class="rounded-circle " alt="user-image">
+  </div>
+  <div class="card-body d-flex flex-column align-items-center">
+    @switch (userCard.role) {
+    @case("admin"){
+    <h5 class="card-title badge text-bg-danger p-2 fs-5">admin</h5>
+    }
+    @case("moderator"){
+    <h5 class="card-title bg-warning text-light p-2 fs-5">moderator</h5>
+    }
+
+    @case("user"){
+    <h5 class="card-title bg-success text-light p-2 fs-5">User</h5>
+    }
+
+    }
+    <h5 class="card-title">{{userCard.username}}</h5>
+    <h5 class="card-title">{{userCard.email}}</h5>
+    <h5 class="card-title">{{userCard.phone}}</h5>
+    <h5 class="card-title">{{userCard.birthDate}}</h5>
+  </div>
+</div>

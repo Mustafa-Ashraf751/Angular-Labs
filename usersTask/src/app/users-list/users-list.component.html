@@ -1,0 +1,34 @@
+<div class="container my-5">
+  <div class="input-group mb-3">
+    <div class="me-5"> <input class="form-control" #userInput type="text" placeholder="User Email"
+        aria-label="default input example">
+    </div>
+    <div class="col-auto">
+      <button (click)="filterUsers(userInput.value)" type="submit" class="btn btn-primary mb-3 me-2">Search</button>
+      <button (click)="resetSearch()" (click)="clearField(userInput)" type="submit"
+        class="btn btn-primary mb-3">Reset</button>
+    </div>
+  </div>
+  <div class="row row-col-1 row-col-md-3 g-4">
+    @if(isButtonClicked===true){
+    @if(userFound.length === 0){
+    <div class="col">
+      <p>No user to show please try again</p>
+    </div>
+    }@else {
+    <div class="col">
+      @for(user of userFound;track user.id){
+      <app-user-card [userCard]="user"></app-user-card>
+      }
+    </div>
+    }
+    }@else {
+    @for(user of users ;track user.id){
+    <div class="col">
+      <app-user-card [userCard]="user"></app-user-card>
+    </div>
+    }
+    }
+
+  </div>
+</div>

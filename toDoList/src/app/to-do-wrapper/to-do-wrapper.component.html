@@ -1,0 +1,5 @@
+<div class="container my-5">
+  <app-to-do-form (sendToWrapper)="receiveFromForm($event)"></app-to-do-form>
+  <app-to-do-list [tasksInput]="tasks" (sendToWrapper)="deleteTask($event)"
+    (complete)="completeTask($event)"></app-to-do-list>
+</div>
