@@ -1,0 +1,9 @@
+.move-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.clickable {
+  cursor: pointer;
+}

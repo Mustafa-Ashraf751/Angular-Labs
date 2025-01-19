@@ -1,0 +1,37 @@
+<div class="card h-100 clickable" (click)="cardClicked(productItem.id)">
+  <div>
+    @if(productItem.stock > 0){
+    <span class="badge text-bg-success move-badge p-y-5 ">In stock</span>
+    }@else {
+    <span class="badge text-bg-danger">Out of stock</span>
+    }
+    <img [src]="productItem.thumbnail" class="card-img-top" alt="product-Photo">
+  </div>
+
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h5 class="card-title">{{productItem.title}}</h5>
+      <h5 class="card-title">${{productItem.price}}</h5>
+    </div>
+
+    <p class="card-text">{{productItem.description}}
+    </p>
+
+    <div class="mb-3">
+      @for(star of [1,2,3,4,5];track star){
+      @if(star<=productItem.rating){ <i class="bi bi-star-fill text-warning"></i>
+        }@else {
+        <i class="bi bi-star text-warning"></i>
+        }
+
+        }
+        <span class="ms-2">{{productItem.rating}} ({{productItem.reviews.length}} reviews)</span>
+    </div>
+    @if(productItem.stock > 0){
+    <a routerLink="cart-items" class="btn btn-light border border-dark rounded-pill">Add to cart</a>
+    }@else {
+    <a routerLink="cart-items" class="btn btn-danger  rounded-pill">Add to cart</a>
+    }
+
+  </div>
+</div>

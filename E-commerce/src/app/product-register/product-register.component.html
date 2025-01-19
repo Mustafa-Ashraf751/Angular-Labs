@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid d-flex justify-content-between">
+    <a class="navbar-brand" routerLink="">Products App</a>
+    <div>
+      <div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-2 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="login">Login</a>
+          </li>
+
+          <li class="nav-item" style="position: relative;">
+            <a routerLink="cart-items" class="nav-link"><i class="fa-solid fa-cart-shopping"><span
+                  class="badge text-bg-danger cart-style">4</span></i></a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5 d-flex flex-column align-items-center">
+  <form class="mb-5" (ngSubmit)="onSubmit()" [formGroup]="UserForm">
+    <div class="mb-3">
+      <label for="exampleInput" class="form-label">Name</label>
+      <input name="email" type="text" class="form-control" id="exampleInput" aria-describedby="emailHelp"
+        formControlName="name">
+    </div>
+    @if(formControls['name'].invalid&&formControls['name'].touched){
+    @if(formControls['name'].hasError('required')){
+    <div class="alert alert-danger">Name Required</div>
+    }
+    @if(formControls['name'].hasError('minlength')){
+    <div class="alert alert-danger">Minimum length to name is 3 characters</div>
+    }
+    }
+    <div class="mb-3">
+      <label for="exampleInputEmail" class="form-label">Email address</label>
+      <input name="email" type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+        formControlName="email">
+    </div>
+
+    @if(formControls['email'].invalid&&formControls['email'].touched){
+    @if(formControls['email'].hasError('required')){
+    <div class="alert alert-danger">Email Required</div>
+    }
+    @if(formControls['email'].hasError('email')){
+    <div class="alert alert-danger">Write email in required format</div>
+    }
+    }
+
+    <div class="mb-3">
+      <label for="exampleInput2" class="form-label">User Name</label>
+      <input name="email" type="text" class="form-control" id="exampleInput2" aria-describedby="emailHelp"
+        formControlName="username">
+    </div>
+
+    @if(formControls['username'].invalid&&formControls['username'].touched){
+    @if(formControls['username'].hasError('required')){
+    <div class="alert alert-danger">Username Required</div>
+    }
+    @if(formControls['username'].hasError('minlength')){
+    <div class="alert alert-danger">Min length to userName is 10 characters</div>
+    }
+    }
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input name="password" type="password" required class="form-control" id="exampleInputPassword1"
+        formControlName="password">
+    </div>
+
+    @if(formControls['password'].invalid&&formControls['password'].touched){
+    @if(formControls['password'].hasError('required')){
+    <div class="alert alert-danger">Password Required</div>
+    }
+    @if(formControls['password'].hasError('pattern')){
+    <div class="alert alert-danger">Please enter password in required format</div>
+    }
+    }
+
+    <div class="mb-3">
+      <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+      <input name="password" type="password" required class="form-control" id="exampleInputPassword2"
+        formControlName="confirmPassword">
+    </div>
+
+    @if(formControls['confirmPassword'].invalid&&formControls['confirmPassword'].touched){
+    @if(formControls['confirmPassword'].hasError('required')){
+    <div class="alert alert-danger">confirmPassword Required</div>
+    }
+    @if(UserForm.hasError('passwordMismatch')){
+    <div class="alert alert-danger">Password doesn't match</div>
+    }
+    }
+
+    <button type="submit" class="btn btn-success w-100">Register</button>
+  </form>
+
+  <div>
+    <p>Already have account ! <a routerLink="register" class="text-dark" style="text-decoration: underline;">Login</a>
+    </p>
+  </div>
+</div>

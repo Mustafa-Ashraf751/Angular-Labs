@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid d-flex justify-content-between">
+    <a class="navbar-brand" routerLink="">Products App</a>
+    <div>
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+
+      <!-- collapse --> <!-- class="collapse navbar-collapse" id="navbarSupportedContent" -->
+      <div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-2 align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="login">Login</a>
+          </li>
+
+          <li class="nav-item" style="position: relative;">
+            <a routerLink="cart-items" class="nav-link"><i class="fa-solid fa-cart-shopping"><span
+                  class="badge text-bg-danger cart-style">4</span></i></a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row">
+    <!-- Product Images -->
+    <div class="col-md-6 mb-4">
+      <img [src]="productDetails.images" alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
+      <div class="d-flex justify-content-between">
+        <!-- <img
+          src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080"
+          alt="Thumbnail 1" class="thumbnail rounded active" onclick="changeImage(event, this.src)">
+        <img
+          src="https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080"
+          alt="Thumbnail 2" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+        <img
+          src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080"
+          alt="Thumbnail 3" class="thumbnail rounded" onclick="changeImage(event, this.src)">
+        <img
+          src="https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080"
+          alt="Thumbnail 4" class="thumbnail rounded" onclick="changeImage(event, this.src)"> -->
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="col-md-6">
+      <h2 class="mb-3">{{productDetails.title}}</h2>
+      <p class="text-muted mb-4">{{productDetails.sku}}</p>
+      <div class="mb-3">
+        <span class="h4 me-2">{{discountPrice}}</span>
+        <span class="text-muted"><s>{{productDetails.price}}</s></span>
+      </div>
+      <div class="mb-3">
+        @for(star of [1,2,3,4,5];track star){
+        @if(star<=getStars()){ <i class="bi bi-star-fill text-warning"></i>
+          }@else {
+          <i class="bi bi-star text-warning"></i>
+          }
+
+          }
+          <span class="ms-2">{{productDetails.rating}} ({{productDetails.reviews.length}} reviews)</span>
+      </div>
+      <p class="mb-4">{{productDetails.description}}</p>
+      <div class="mb-4 flex-column">
+        <label>More information:</label>
+        <div class="d-flex gap-2 align-items-center my-3"> <label>category</label>
+          <span class="badge text-bg-danger">{{productDetails.category}}</span>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+          <label for="">brand</label>
+          <span class="badge text-bg-primary">{{productDetails.brand}}</span>
+        </div>
+      </div>
+      <div class="mb-4">
+        <label for="quantity" class="form-label">Quantity:</label>
+        <div class="d-flex gap-2 align-items-center">
+          <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
+          @if(productDetails.stock > 0){
+          <p class="my-1"><span class="badge text-bg-success">{{productDetails.stock}}</span> left in the stock !</p>
+          }@else {
+          <p style="color: red;">Out of stock</p>
+          }
+        </div>
+
+      </div>
+      <button class="btn btn-primary btn-lg mb-3 me-2">
+        <i class="fa-solid fa-truck-fast"></i> Buy Now
+      </button>
+      <button routerLink="cart-items" class="btn btn-outline-secondary btn-lg mb-3">
+        <i class="bi bi-cart-plus"></i> Add to Cart
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function changeImage(event, src) {
+    document.getElementById('mainImage').src = src;
+    document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+</script>
