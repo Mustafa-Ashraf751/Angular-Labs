@@ -28,9 +28,6 @@ export class ProductRegisterComponent {
       const password = control.get('password')?.value;
       const confirmPassword = control.get('confirmPassword')?.value;
 
-      console.log('Password:', password); // Debugging
-      console.log('Confirm Password:', confirmPassword);
-
       return password === confirmPassword ? null : { passwordMismatch: true };
     }
 

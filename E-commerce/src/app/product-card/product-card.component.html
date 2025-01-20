@@ -1,11 +1,11 @@
-<div class="card h-100 clickable" (click)="cardClicked(productItem.id)">
+<div class="card h-100 clickable">
   <div>
     @if(productItem.stock > 0){
     <span class="badge text-bg-success move-badge p-y-5 ">In stock</span>
     }@else {
     <span class="badge text-bg-danger">Out of stock</span>
     }
-    <img [src]="productItem.thumbnail" class="card-img-top" alt="product-Photo">
+    <img [src]="productItem.thumbnail" (click)="cardClicked(productItem.id)" class="card-img-top" alt="product-Photo">
   </div>
 
   <div class="card-body">
@@ -23,14 +23,13 @@
         }@else {
         <i class="bi bi-star text-warning"></i>
         }
-
         }
         <span class="ms-2">{{productItem.rating}} ({{productItem.reviews.length}} reviews)</span>
     </div>
     @if(productItem.stock > 0){
-    <a routerLink="cart-items" class="btn btn-light border border-dark rounded-pill">Add to cart</a>
+    <a (click)="addCartOnClick(productItem)" class="btn btn-light border border-dark rounded-pill">Add to cart</a>
     }@else {
-    <a routerLink="cart-items" class="btn btn-danger  rounded-pill">Add to cart</a>
+    <a class="btn btn-danger  rounded-pill">Add to cart</a>
     }
 
   </div>

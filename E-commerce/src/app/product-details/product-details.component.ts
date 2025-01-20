@@ -1,41 +1,40 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../types/Product';
 import { RouterLink } from '@angular/router';
-import products from '../products.json';
+import { ProductServiceService } from '../services/product-service.service';
+import { CartService } from '../services/cart-service.service';
+import { DiscountPipe } from '../pipes/discount.pipe';
 
 @Component({
   selector: 'app-product-details',
-  imports: [RouterLink],
+  imports: [RouterLink, DiscountPipe],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+  styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent {
+  @Input() id!: string;
 
-  @Input() id !: string;
+  productDetails!: any;
 
-  productDetails !: Product;
+  discountPrice!: string;
 
-  discountPrice !: string;
-
-
+  constructor(
+    private getProductById: ProductServiceService,
+    private service: CartService
+  ) {}
 
   ngOnInit(): void {
-    const result = products.find((product)=>product.id === Number.parseInt(this.id));
-    if(!result){
-       throw Error("Sorry the product you want is not found")
-    }else{
-      this.productDetails = result;
-      const newPrice = result.price - (result.price*(result.discountPercentage /100));
-      this.discountPrice = newPrice.toFixed(2);
-
-    }
+    this.getProductById.getProductListById(this.id).subscribe(
+      (res) => (this.productDetails = res),
+      (error) => console.log(error)
+    );
   }
 
-  getStars(){
+  addCartOnClick(product: Product) {
+    this.service.addToCart(product);
+  }
+
+  getStars() {
     return Math.floor(this.productDetails.rating);
   }
-
-
-
-
 }

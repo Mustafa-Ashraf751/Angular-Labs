@@ -1,13 +1,23 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ProductListComponent } from './product-list/product-list.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { CartService } from './services/cart-service.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ProductListComponent],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'E-commerce';
+
+  numberOfItems!: number;
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService
+      .getNumberOfItems()
+      .subscribe((number) => (this.numberOfItems = number));
+  }
 }
