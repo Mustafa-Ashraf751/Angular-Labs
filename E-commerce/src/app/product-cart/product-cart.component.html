@@ -2,87 +2,78 @@
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       @if(itemsInCart == 0){
-      <div class="container-fluid  mt-100">
+      <div class="container-fluid mt-100">
         <div class="row">
-
           <div class="col-md-12">
-
             <div class="card">
               <div class="card-header">
                 <h5>Shopping Cart</h5>
               </div>
               <div class="card-body cart">
                 <div class="col-sm-12 empty-cart-cls text-center">
-                  <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                  <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3" />
                   <h3><strong>Your Cart is Empty</strong></h3>
                   <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
-
-
                 </div>
               </div>
             </div>
-
-
           </div>
-
         </div>
-
       </div>
       }@else {
       <div class="col-10">
         <div class="d-flex justify-content-between align-items-center mb-4">
           <h3 class="fw-normal mb-0">Shopping Cart</h3>
-          <div>
-          </div>
+          <div></div>
         </div>
         @for(cart of cartArray;track cart){
         <div class="card rounded-3 mb-4">
           <div class="card-body p-4">
             <div class="row d-flex justify-content-between align-items-center">
               <div class="col-md-2 col-lg-2 col-xl-2">
-                <img [src]="cart.thumbnail" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                <img [src]="cart.thumbnail" class="img-fluid rounded-3" alt="Cotton T-shirt" />
               </div>
               <div class="col-md-3 col-lg-3 col-xl-3">
-                <p class="lead fw-normal mb-2">{{cart.title}}</p>
+                <p class="lead fw-normal mb-2">{{ cart.title }}</p>
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                  (click)="updateQuantity(-1,cart)">
                   <i class="fas fa-minus"></i>
                 </button>
 
-                <input id="form1" min="0" name="quantity" value="2" type="number"
-                  class="form-control form-control-sm" />
+                <input id="form1" min="1" name="quantity" value="1" type="number" class="form-control form-control-sm"
+                  [(ngModel)]="cart.quantity" readonly />
 
                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                  (click)="updateQuantity(1,cart)">
                   <i class="fas fa-plus"></i>
                 </button>
               </div>
               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <span class="h4 me-2">{{cart.price|discount:cart.discountPercentage}}</span>
-                <span class="text-muted"><s>{{cart.price}}</s></span>
+                <span class="h4 me-2">{{
+                  cart.price | discount : cart.discountPercentage
+                  }}</span>
+                <span class="text-muted"><s>{{ cart.price }}</s></span>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+                <a href="#!" class="text-danger" (click)="deleteItem(cart,$event)"><i
+                    class="fas fa-trash fa-lg"></i></a>
               </div>
             </div>
           </div>
         </div>
         }
 
-
-
         <div class="card">
           <div class="card-body">
-            <button type="button" data-mdb-button-init data-mdb-ripple-init
-              class="btn btn-warning btn-block btn-lg">Proceed to Pay</button>
+            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">
+              Proceed to Pay
+            </button>
           </div>
         </div>
-
       </div>
       }
-
     </div>
   </div>
 </section>

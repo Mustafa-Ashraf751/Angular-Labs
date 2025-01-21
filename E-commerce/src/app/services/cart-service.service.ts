@@ -21,6 +21,10 @@ export class CartService {
     this.numberOfItems.next(this.productCartItems.length);
   }
 
+  setCartItems(num: number) {
+    this.numberOfItems.next(num);
+  }
+
   getCartItems(): Product[] {
     return this.productCartItems;
   }
